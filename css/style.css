@@ -1,0 +1,49 @@
+body{
+ background-color: #d1e0e0;
+ margin: 0px;
+ padding: 0px;
+}
+.home-image{
+    width: 100%;
+    height: 500px;
+    
+}
+.macondo-regular {
+    font-family: "Macondo", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+.font{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.login-container{
+    background-color: #fff;
+    width: 400px;
+    display: block;
+    margin: 40px auto;
+    padding: 15px 20px;
+    box-shadow: 1px 3px 4px 3px gray;
+}
+.login-container:hover{
+    box-shadow: 3px 1px 4px 3px gray;
+}
+
+.align{
+    text-align: center;
+}
+.login-btn{
+    background-color: #809fff;
+    border: 2px solid #00134d;
+   display: block;
+   color:#fff;
+   margin: 48px auto;
+   width: 180px;
+   font-size: 28px;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   padding: 5px ;
+}
+.login-btn:hover{
+    cursor: pointer;
+    background-color: #00134d;
+}
