@@ -47,3 +47,31 @@ body{
     cursor: pointer;
     background-color: #00134d;
 }
+.side-text{
+    font-size: 23px;
+}
+.name-icon{
+    padding: 20px;
+}
+.icon{
+    padding: 10px;
+    font-size: 25px;
+    width: 30px;
+    color:#00134d;
+}
+.icon-container{
+    width: 200px;
+    background-color: aquamarine;
+}
+.sidebar-container{
+    width: 300px;
+    height: 600px;
+    background-color: #fff;
+}
+.head-icon{
+    color: #fff;
+}
+.header{
+    width: 1370px;
+    background-color: #193eac;
+}
