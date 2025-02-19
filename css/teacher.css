@@ -1,0 +1,55 @@
+.full-page-container{
+    
+}
+.Dashboard-name{
+    margin: 20px 20px;
+    color: darkslategray;
+}
+.dashboard-card{
+    width: 250px;
+    margin: 30px 80px;
+    height: 70px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 2px #669999;
+}
+
+.dash-icon{
+    margin-left: 150px;
+    color: #000099;
+}
+.font{
+    font-size: 20px;
+}
+.dash-container{
+   display: flex;
+   
+}
+.attendanceView-container{
+    display: flex;
+}
+.viweAttendance-card{
+    background-color: #fff;
+    margin-left: 30px;
+    padding-left:  15px;
+    width: 960px;
+}
+.form-control-label{
+    font-size: 22px;
+}
+.form-control{
+    width: 400px;
+    font-size: 18px;
+    padding: 2px;
+    margin-left: 5px;
+}
+.btn-view{
+    background-color: rgb(94, 175, 196);
+    font-size: 20px;
+    width: 200px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    margin: 10px;
+}
