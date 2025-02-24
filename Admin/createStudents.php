@@ -37,33 +37,22 @@ include '../Includes/session.php';
           </div>
 
           <div class="viweAttendance-card">
-            <form method="post">
-              <div class="form-group">
-                <div >
-                  <label class="form-control-label">Firstname:</label>
-                  <input type="text" class="form-control" name="firstName" value="<?php echo $row['firstName']; ?>" id="exampleInputFirstName">
-                </div>
-                <div class="form-group">
-                  <div class="col-xl-6">
-                    <label class="form-control-label">Lastname:</label>
-                    <input type="text" class="form-control" name="lastName" value="<?php echo $row['lastName']; ?>" id="exampleInputFirstName">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-xl-6">
-                  <label class="form-control-label">Admission Number:</label>
-                  <input type="text" class="form-control" required name="admissionNumber" value="<?php echo $row['admissionNumber']; ?>" id="exampleInputFirstName">
-                </div>
-              </div>
-              <div class="form-group " style="padding-bottom: 15px;">
-                <div class="col-xl-6">
-                  <label class="form-control-label">Select Class:</label>
-                  <input type="text" class="form-control" required name="admissionNumber">
-                  
-                </div>
-              </div>
-              <button type="button" id="saveButton" class="btn-view">Save</button>
+            <form id="studentForm">
+            <label for="number" class="form-control-label">Number:</label>
+            <input type="text" id="number" class="form-control"  required><br><br>
+            <label for="firstname" class="form-control-label">First Name:</label>
+        <input type="text" id="firstname" class="form-control" required><br><br>
+
+        <label for="lastname" class="form-control-label">Last Name:</label>
+        <input type="text" id="lastname" class="form-control" required><br><br>
+
+        <label for="admissionNo" class="form-control-label">Admission No:</label>
+        <input type="text" id="admissionNo" class="form-control" required><br><br>
+
+        <label for="class" class="form-control-label">Class:</label>
+        <input type="text" id="class" class="form-control"  required><br><br>
+
+        <button type="submit" class="btn-view">Add Student</button>
             </form>
           </div>
         
@@ -75,7 +64,7 @@ include '../Includes/session.php';
                 <h6 style="color: blue; padding:5px" class="side-text">All Student</h6>
               </div>
               <div >
-                <table class="table " id="dataTableHover">
+                <table class="table " id="studentTable">
                   <thead class="thead-light">
                     <tr>
                       <th>#</th>
@@ -83,15 +72,11 @@ include '../Includes/session.php';
                       <th>Last Name</th>
                       <th>Admission No</th>
                       <th>Class</th>
-                      <th>Date Created</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
 
-                  <tbody>
-
-                    
-                  </tbody>
+                  <tbody></tbody>
                 </table>
               </div>
             </div>
@@ -111,12 +96,64 @@ include '../Includes/session.php';
 
 
   <!-- Page level custom scripts -->
+  
+
+    
+
+  
+  </table>
+
+
+
   <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const studentForm = document.getElementById('studentForm');
+            const studentTable = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+
+            const loadStudents = () => {
+                studentTable.innerHTML = '';
+                const students = JSON.parse(localStorage.getItem('students')) || [];
+                students.forEach((student, index) => {
+                    const row = studentTable.insertRow();
+                    row.insertCell(0).innerText = student.number;
+                    row.insertCell(1).innerText = student.firstname;
+                    row.insertCell(2).innerText = student.lastname;
+                    row.insertCell(3).innerText = student.admissionNo;
+                    row.insertCell(4).innerText = student.class;
+                    const actionsCell = row.insertCell(5);
+                    const deleteButton = document.createElement('button');
+                    deleteButton.innerText = 'Delete';
+                    deleteButton.onclick = () => deleteStudent(index);
+                    actionsCell.appendChild(deleteButton);
+                });
+            };
+
+            const deleteStudent = (index) => {
+                const students = JSON.parse(localStorage.getItem('students')) || [];
+                students.splice(index, 1);
+                localStorage.setItem('students', JSON.stringify(students));
+                loadStudents();
+            };
+
+            studentForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const students = JSON.parse(localStorage.getItem('students')) || [];
+                const newStudent = {
+                    number: studentForm.number.value,
+                    firstname: studentForm.firstname.value,
+                    lastname: studentForm.lastname.value,
+                    admissionNo: studentForm.admissionNo.value,
+                    class: studentForm.class.value
+                };
+                students.push(newStudent);
+                localStorage.setItem('students', JSON.stringify(students));
+                loadStudents();
+                studentForm.reset();
+            });
+
+            loadStudents();
+        });
+    </script>
 </body>
 
 </html>
