@@ -26,7 +26,12 @@ include '../Includes/session.php';
             <h1 class="Dashboard-name">Administrator Dashboard
             </h1>
             <div style="display: flex;">
+                <div >
+                    a
+                </div>
+</div>
 
+<<<<<<< HEAD
                 <div>
                     <div class="dashboard-card">
                         
@@ -71,6 +76,10 @@ include '../Includes/session.php';
                         </div>
                     </div>
                 </div>
+=======
+
+               
+>>>>>>> 39650dbd2609f7e8204929c83d9c42983ad95c0f
 </body>
 
 </html>

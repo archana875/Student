@@ -49,79 +49,62 @@ if (isset($_POST['save'])) {
           </div>
 
           <div class="viweAttendance-card">
-          <div>
-            <h6 style="color: blue; padding:5px;" class="side-text">Create Students</h6>
-          </div>
-            <form method="POST" action="">
-            <div style="display: flex;">
-            <div>
-              <label for="firstName" class="form-control-label">First Name:<input type="text" name="firstName" required class="form-control"><br><br>
-              <label for="lastName" class="form-control-label">Last Name:<input type="text" name="lastName" required class="form-control"><br><br>
+            <form method="post">
+              <div class="form-group">
+                <div >
+                  <label class="form-control-label">Firstname:</label>
+                  <input type="text" class="form-control" name="firstName" value="<?php echo $row['firstName']; ?>" id="exampleInputFirstName">
+                </div>
+                <div class="form-group">
+                  <div class="col-xl-6">
+                    <label class="form-control-label">Lastname:</label>
+                    <input type="text" class="form-control" name="lastName" value="<?php echo $row['lastName']; ?>" id="exampleInputFirstName">
+                  </div>
+                </div>
               </div>
-              <div style=" margin-left:50px;">
-              <label for="admissionNo" class="form-control-label">Admission No:<input type="text" name="admissionNo" required class="form-control"><br><br>
-              <label for="ClassName" class="form-control-label">Class Name:<input type="text" name="className" required class="form-control"><br><br>
+              <div class="form-group">
+                <div class="col-xl-6">
+                  <label class="form-control-label">Admission Number:</label>
+                  <input type="text" class="form-control" required name="admissionNumber" value="<?php echo $row['admissionNumber']; ?>" id="exampleInputFirstName">
+                </div>
               </div>
+              <div class="form-group " style="padding-bottom: 15px;">
+                <div class="col-xl-6">
+                  <label class="form-control-label">Select Class:</label>
+                  <input type="text" class="form-control" required name="admissionNumber">
+                  
+                </div>
               </div>
-              <input type="submit" name="save" value="Submit" class="btn-view">
+              <button type="button" id="saveButton" class="btn-view">Save</button>
             </form>
           
 
 
-          <!-- Input Group -->
+        <!-- Input Group -->
+        
+            <div class="viweAttendance-card">
+              <div >
+                <h6 style="color: blue; padding:5px" class="side-text">All Student</h6>
+              </div>
+              <div >
+                <table class="table " id="dataTableHover">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>#</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Admission No</th>
+                      <th>Class</th>
+                      <th>Date Created</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
 
-          <div >
-            <div>
-              <h6 style="color: blue; padding:5px" class="side-text">All Student</h6>
-            </div>
-            <div>
-              <table class="table ">
-                <thead class="thead-light">
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Admission No</th>
-                    <th>Class</th>
+                  <tbody>
 
-                    <th>Delete</th>
-                  </tr>
-                </thead>
-
-                <tbody >
-                <?php
-                      $query = "SELECT * FROM student";
-                      $rs = $conn->query($query);
-                      $num = $rs->num_rows;
-                      $sn=0;
-                      $status="";
-                      if($num > 0)
-                      { 
-                        while ($rows = $rs->fetch_assoc())
-                          {
-                             $sn = $sn + 1;
-                            echo"
-                              <tr>
-                                <td>".$sn."</td>
-                                <td>".$rows['firstName']."</td>
-                                <td>".$rows['lastName']."</td>
-                                <td>".$rows['admissionNo']."</td>
-                                <td>".$rows['className']."</td>
-                                <td><a href='?action=delete&Id=".$rows['Id']."&classArmId=".$rows['classArmId']."'><i class='fas fa-fw fa-trash'></i></a></td>
-                              </tr>";
-                          }
-                      }
-                      else
-                      {
-                           echo   
-                           "<div class='alert alert-danger' role='alert'>
-                            No Record Found!
-                            </div>";
-                      }
-                      
-                      ?>
-                </tbody>
-              </table>
+                    
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -140,7 +123,13 @@ if (isset($_POST['save'])) {
 
 
 
-
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 </body>
 
 </html>

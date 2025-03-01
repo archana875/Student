@@ -75,7 +75,7 @@ body{
 }
 .sidebar-container{
     width: 300px;
-    height: auto;
+    height: 600px;
     background-color: #fff;
     visibility: visible;
 }
