@@ -11,7 +11,8 @@ include '../Includes/session.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image" href="./../image/logo.png">
+    <title>AMS-Dashboard</title>
 </head>
 
 <body>
@@ -28,26 +29,20 @@ include '../Includes/session.php';
 
                 <div>
                     <div class="dashboard-card">
-                        <?php
-                        $query1 = mysqli_query($conn, "SELECT * from tblstudents");
-                        $students = mysqli_num_rows($query1);
-                        ?>
+                        
                         <div class="font">Students</div>
                         <div class="font">
-                            <?php echo $students; ?>
+                            10
                         </div>
                         <div>
                             <i class="fas fa-users fa-2x text-info"></i>
                         </div>
                     </div>
                     <div class="dashboard-card">
-                        <?php
-                        $query1 = mysqli_query($conn,"SELECT * from tblclass");
-                        $class = mysqli_num_rows($query1);
-                        ?>
+                        
                         <div class="font">Classes</div>
                         <div class="font">
-                            <?php echo $class; ?>
+                            4
                         </div>
                         <div>
                             <i class="fas fa-chalkboard fa-2x text-primary"></i>
@@ -56,26 +51,20 @@ include '../Includes/session.php';
                 </div>
                 <div>
                     <div class="dashboard-card">
-                        <?php
-                        $query1 = mysqli_query($conn, "SELECT * from tblclassteacher");
-                        $classTeacher = mysqli_num_rows($query1);
-                        ?>
+                        
                         <div class="font">Class Teacher</div>
                         <div class="font">
-                            <?php echo $classTeacher; ?>
+                            3
                         </div>
                         <div>
                             <i class="fas fa-chalkboard-teacher fa-2x text-danger"></i>
                         </div>
                     </div>
                     <div class="dashboard-card">
-                        <?php
-                        $query1 = mysqli_query($conn, "SELECT * from tblsessionterm");
-                        $sessTerm = mysqli_num_rows($query1);
-                        ?>
+                        
                         <div class="font">Session & Terms</div>
                         <div class="font">
-                            <?php echo $sessTerm; ?>
+                            5
                         </div>
                         <div>
                             <i class="fas fa-calendar-alt fa-2x text-warning"></i>

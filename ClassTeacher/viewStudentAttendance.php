@@ -14,8 +14,8 @@ include '../Includes/session.php';
   <meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Dashboard</title>
+  <link rel="icon" type="image" href="./../image/logo.png">
+  <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/style.css">
   <link rel="stylesheet" href="./../css/teacher.css">
 

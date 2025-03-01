@@ -14,8 +14,8 @@ include '../Includes/session.php';
   <meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Dashboard</title>
+  <link rel="icon" type="image" href="./../image/logo.png">
+  <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/style.css">
   <link rel="stylesheet" href="./../css/teacher.css">
 </head>
@@ -33,7 +33,7 @@ include '../Includes/session.php';
           <h1 class="Dashboard-name">View Class Attendance</h1>
         </div>
         <!-- Form Basic -->
-        <div class="viweAttendance-card">
+        <div >
           <div>
             <h6 style="color: blue; padding:5px" class="side-text">View Class Attendance</h6>
             <?php echo $statusMsg; ?>
@@ -46,8 +46,24 @@ include '../Includes/session.php';
             <button type="submit" name="view" class="btn-view">View Attendance</button>
           </form>
         </div>
+        <table id="attendanceTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Admission No</th>
+                <th>Class</th>
+                <th>Present</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Attendance records will be listed here -->
+        </tbody>
+    </table>
 
-        
+
         </div>
       </div>
     </div>
@@ -61,15 +77,9 @@ include '../Includes/session.php';
   </div>
   </div>
 
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+  
   <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
+   
   </script>
 </body>
 
