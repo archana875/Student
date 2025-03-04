@@ -10,8 +10,7 @@ if (isset($_POST['save'])) {
   $admissionNo = $_POST['admissionNo'];
   $className = $_POST['className'];
 
-  $query = mysqli_query($conn, "INSERT INTO student(firstName,lastName,admissionNo,className) VALUES ('$firstName','$lastName','$admissionNo','$className')");
-  
+  $query = mysqli_query($conn, "INSERT INTO student (firstName,lastName,admissionNo,className) VALUES ('$firstName','$lastName','$admissionNo','$className')");
 }
 
 
@@ -49,60 +48,80 @@ if (isset($_POST['save'])) {
           </div>
 
           <div class="viweAttendance-card">
-            <form method="post">
-              <div class="form-group">
-                <div >
+          <div>
+            <h6 style="color: blue; padding:5px;" class="side-text">Create Students</h6>
+
+          </div>
+            <form method="post" action="">
+              <div style="display: flex;">
+                <div>
                   <label class="form-control-label">Firstname:</label>
-                  <input type="text" class="form-control" name="firstName" value="<?php echo $row['firstName']; ?>" id="exampleInputFirstName">
+                  <input type="text" class="form-control" name="firstName"><br><br>
+                  <label class="form-control-label">Lastname:</label>
+                  <input type="text" class="form-control" name="lastName"><br><br>
                 </div>
-                <div class="form-group">
-                  <div class="col-xl-6">
-                    <label class="form-control-label">Lastname:</label>
-                    <input type="text" class="form-control" name="lastName" value="<?php echo $row['lastName']; ?>" id="exampleInputFirstName">
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-xl-6">
+                <div style=" margin-left:50px;">
                   <label class="form-control-label">Admission Number:</label>
-                  <input type="text" class="form-control" required name="admissionNumber" value="<?php echo $row['admissionNumber']; ?>" id="exampleInputFirstName">
+                  <input type="text" class="form-control" required name="admissionNo"><br><br>
+                  <label class="form-control-label">Class Name:</label>
+                  <input type="text" class="form-control" required name="className"><br><br>
                 </div>
               </div>
-              <div class="form-group " style="padding-bottom: 15px;">
-                <div class="col-xl-6">
-                  <label class="form-control-label">Select Class:</label>
-                  <input type="text" class="form-control" required name="admissionNumber">
-                  
-                </div>
-              </div>
-              <button type="button" id="saveButton" class="btn-view">Save</button>
+              <button type="submit" class="btn-view" name="save">Save</button>
             </form>
-          
 
 
-        <!-- Input Group -->
-        
-            <div class="viweAttendance-card">
-              <div >
+
+            <!-- Input Group -->
+
+            <div >
+              <div>
                 <h6 style="color: blue; padding:5px" class="side-text">All Student</h6>
               </div>
-              <div >
-                <table class="table " id="dataTableHover">
+              <div>
+                <table class="table ">
                   <thead class="thead-light">
-                    <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Admission No</th>
-                      <th>Class</th>
-                      <th>Date Created</th>
-                      <th>Delete</th>
-                    </tr>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admission No</th>
+                    <th>Class</th>
+
+                    <th>Delete</th>
+                  </tr>
                   </thead>
 
                   <tbody>
+                    <?php
+                    $query = "SELECT * FROM student";
+                    $rs = $conn->query($query);
+                    $num = $rs->num_rows;
+                    $sn = 0;
+                    $status = "";
+                    if ($num > 0) {
+                      while ($rows = $rs->fetch_assoc()) {
+                        $sn = $sn + 1;
+                        echo "
+                              <tr>
+                                <td>" . $sn . "</td>
+                                <td>" . $rows['firstName'] . "</td>
+                                <td>" . $rows['lastName'] . "</td>
+                                
+                                <td>" . $rows['admissionNo'] . "</td>
+                                <td>" . $rows['className'] . "</td>
+                                <td><a href='?action=delete&Id=" . $rows['Id'] . "'><i class='fas fa-fw fa-trash'></i></a></td>
+                              </tr>";
+                      }
+                    } else {
+                      echo
+                      "<div class='alert alert-danger' role='alert'>
+                            No Record Found!
+                            </div>";
+                    }
 
-                    
+                    ?>
+
                   </tbody>
                 </table>
               </div>

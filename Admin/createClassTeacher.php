@@ -71,7 +71,7 @@ if (isset($_POST['save'])) {
               <input type="text" class="form-control" name="className"><br><br>
               </div>
               </div>
-              <button type="submit" onclick="saveTeacher()" class="btn-view" name="save">Save</button>
+              <button type="submit" class="btn-view" name="save">Save</button>
             </form>
           </div>
 

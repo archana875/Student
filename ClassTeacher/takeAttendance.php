@@ -1,59 +1,43 @@
-<?php 
+<?php
 error_reporting(0);
 include '../Includes/dbconn.php';
 include '../Includes/session.php';
-
-    $query = "SELECT * FROM student";
-    $rs = $conn->query($query);
-    $num = $rs->num_rows;
-    $rrw = $rs->fetch_assoc();
-
-if(isset($_POST['save'])){
-    
-    $admissionNo=$_POST['admissionNo'];
-
-    $check=$_POST['check'];
-    $N = count($admissionNo);
-    $status = "";
+// Get the list of students from the database (assuming you have a 'students' table)
+$sql_students = "SELECT * FROM student";
+$rs = $conn->query($sql_students);
 
 
-//check if the attendance has not been taken i.e if no record has a status of 1
-  $query=mysqli_query($conn,"select * from attendance  where classId = '$_SESSION[classId]' and  dateTimeTaken='$dateTaken' and status = '1'");
-  $count = mysqli_num_rows($query);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $attendance_date = date("Y-m-d"); // Current date
+    $attendance_time = date("H:i:s"); // Current time
 
-  if($count > 0){
+    if (isset($_POST['student_attendance'])) {
+        foreach ($_POST['student_attendance'] as $student_name => $attendance_status) {
+            $student_name = $conn->real_escape_string($student_name); // Sanitize input
 
-      $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>Attendance has been taken for today!</div>";
+            // Get student ID by name
+            $sql_student_id = "SELECT * FROM student WHERE firstName = '$student_name'";
+            $result_student_id = $conn->query($sql_student_id);
 
-  }
+            if ($result_student_id->num_rows > 0) {
+                $row_student_id = $result_student_id->fetch_assoc();
 
-    else //update the status to 1 for the checkboxes checked
-    {
 
-        for($i = 0; $i < $N; $i++)
-        {
-                $admissionNo[$i]; //admission Number
+                $sql_insert_attendance = "INSERT INTO attendance6 (student_name, attendance_date, attendance_time, status) VALUES ('$student_name', '$attendance_date', '$attendance_time', '$attendance_status')";
 
-                if(isset($check[$i])) //the checked checkboxes
-                {
-                      $qquery=mysqli_query($conn,"update attendance set status='1' where admissionNo = '$check[$i]'");
-
-                      if ($qquery) {
-
-                          $statusMsg = "<div class='alert alert-success'  style='margin-right:700px;'>Attendance Taken Successfully!</div>";
-                      }
-                      else
-                      {
-                          $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error Occurred!</div>";
-                      }
-                  
+                if ($conn->query($sql_insert_attendance) !== TRUE) {
+                    echo "Error: " . $sql_insert_attendance . "<br>" . $conn->error;
                 }
-          }
-      }
-
-   
-
+            } else {
+                echo "Error: Student '$student_name' not found.<br>";
+            }
+        }
+        echo "<p>Attendance recorded successfully!</p>";
+    }
 }
+
+
+
 
 
 ?>
@@ -80,14 +64,16 @@ if(isset($_POST['save'])){
 
             <div>
                 <div>
-                    <h1 class="Dashboard-name">Take Attendance (Today's Date : <?php echo $todaysDate = date("d-m-Y"); ?>)</h1>
+                    <h1 class="Dashboard-name">Take Attendance (Today's Date : <?php echo $dateTaken = date("d-m-Y"); ?>)</h1>
                 </div>
                 <div class="viweAttendance-card">
-                <form method="post">
-                    <div>
-                        <h6 style="color: blue; padding:5px" class="side-text">All Student in Class</h6>
-                    </div>
-                    <table class="table" >
+                    <form method="post" action="#">
+                        <div>
+                            <h6 style="color: blue; padding:5px" class="side-text">All Student in Class</h6>
+                        </div>
+                        <?php echo $statusMsg; ?>
+                        <button type="submit" name="save" class="btn-view">Take Attendance</button>
+                        <table class="table">
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
@@ -95,46 +81,46 @@ if(isset($_POST['save'])){
                                     <th>Last Name</th>
                                     <th>Admission No</th>
                                     <th>Class</th>
+                                    <th>Check</th>
+                                    <th>Check</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                            <?php
-                      $query = "SELECT * FROM student ";
-                      $rs = $conn->query($query);
-                      $num = $rs->num_rows;
-                      $sn=0;
-                      $status="";
-                      if($num > 0)
-                      { 
-                        while ($rows = $rs->fetch_assoc())
-                          {
-                             $sn = $sn + 1;
-                            echo"
+                                <?php
+                                $query = "SELECT * FROM student";
+                                $rs = $conn->query($query);
+                                $num = $rs->num_rows;
+                                $sn = 0;
+                                $status = "";
+                                if ($num > 0) {
+                                    while ($rows = $rs->fetch_assoc()) {
+                                        $sn = $sn + 1;
+                                        echo "
                               <tr>
-                                <td>".$sn."</td>
-                                <td>".$rows['firstName']."</td>
-                                <td>".$rows['lastName']."</td>
-                                <td>".$rows['admissionNo']."</td>
-                                <td>".$rows['className']."</td>
-                                <td><input name='check[]' type='checkbox' value=".$rows['admissionNo']." class='form-control'></td>
+                                <td>" . $sn . "</td>
+                                <td>" . $rows['firstName'] . "</td>
+                                <td>" . $rows['lastName'] . "</td>
+                                
+                                <td>" . $rows['admissionNo'] . "</td>
+                                <td>" . $rows['className'] . "</td>
+                                
+                                <td><input type='radio' name='student_attendance[" . $rows["firstName"] . "]' value='present' required></td>;
+                                <td><input type='radio' name='student_attendance[" . $rows["firstName"] . "]' value='absent' required></td>;
                               </tr>";
-                              
-                          }
-                      }
-                      else
-                      {
-                           echo   
-                           "<div class='alert alert-danger' role='alert'>
+                                    }
+                                } else {
+                                    echo
+                                    "<div class='alert alert-danger' role='alert'>
                             No Record Found!
                             </div>";
-                      }
-                      
-                      ?>
+                                }
+
+                                ?>
                             </tbody>
-                    </table>
-                    <button type="submit" name="save" class="btn-view">Take Attendance</button>
-                </form>
+                        </table>
+
+                    </form>
                 </div>
             </div>
         </div>
