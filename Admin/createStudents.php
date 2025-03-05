@@ -1,8 +1,17 @@
 <?php
 error_reporting(0);
-include '../Includes/dbcon.php';
+include '../Includes/dbconn.php';
 include '../Includes/session.php';
 
+if (isset($_POST['save'])) {
+
+  $firstName = $_POST['firstName'];
+  $lastName = $_POST['lastName'];
+  $admissionNo = $_POST['admissionNo'];
+  $className = $_POST['className'];
+
+  $query = mysqli_query($conn, "INSERT INTO student (firstName,lastName,admissionNo,className) VALUES ('$firstName','$lastName','$admissionNo','$className')");
+}
 
 
 ?>
@@ -12,11 +21,13 @@ include '../Includes/session.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="icon" type="image" href="./../image/logo.png">
+  <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/login.css">
   <link rel="stylesheet" href="./../css/teacher.css">
   <link rel="stylesheet" href="./../css/admin.css">
-  
+  <link rel="stylesheet" href="./../css/style.css">
+
 </head>
 
 </head>
@@ -37,54 +48,90 @@ include '../Includes/session.php';
           </div>
 
           <div class="viweAttendance-card">
-            <form id="studentForm">
-            <label for="number" class="form-control-label">Number:</label>
-            <input type="text" id="number" class="form-control"  required><br><br>
-            <label for="firstname" class="form-control-label">First Name:</label>
-        <input type="text" id="firstname" class="form-control" required><br><br>
+          <div>
+            <h6 style="color: blue; padding:5px;" class="side-text">Create Students</h6>
 
-        <label for="lastname" class="form-control-label">Last Name:</label>
-        <input type="text" id="lastname" class="form-control" required><br><br>
-
-        <label for="admissionNo" class="form-control-label">Admission No:</label>
-        <input type="text" id="admissionNo" class="form-control" required><br><br>
-
-        <label for="class" class="form-control-label">Class:</label>
-        <input type="text" id="class" class="form-control"  required><br><br>
-
-        <button type="submit" class="btn-view">Add Student</button>
-            </form>
           </div>
-        
+            <form method="post" action="">
+              <div style="display: flex;">
+                <div>
+                  <label class="form-control-label">Firstname:</label>
+                  <input type="text" class="form-control" name="firstName"><br><br>
+                  <label class="form-control-label">Lastname:</label>
+                  <input type="text" class="form-control" name="lastName"><br><br>
+                </div>
+                <div style=" margin-left:50px;">
+                  <label class="form-control-label">Admission Number:</label>
+                  <input type="text" class="form-control" required name="admissionNo"><br><br>
+                  <label class="form-control-label">Class Name:</label>
+                  <input type="text" class="form-control" required name="className"><br><br>
+                </div>
+              </div>
+              <button type="submit" class="btn-view" name="save">Save</button>
+            </form>
 
-        <!-- Input Group -->
-        
-            <div class="viweAttendance-card">
-              <div >
+
+
+            <!-- Input Group -->
+
+            <div >
+              <div>
                 <h6 style="color: blue; padding:5px" class="side-text">All Student</h6>
               </div>
-              <div >
-                <table class="table " id="studentTable">
+              <div>
+                <table class="table ">
                   <thead class="thead-light">
-                    <tr>
-                      <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Admission No</th>
-                      <th>Class</th>
-                      <th>Delete</th>
-                    </tr>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Admission No</th>
+                    <th>Class</th>
+
+                    <th>Delete</th>
+                  </tr>
                   </thead>
 
-                  <tbody></tbody>
+                  <tbody>
+                    <?php
+                    $query = "SELECT * FROM student";
+                    $rs = $conn->query($query);
+                    $num = $rs->num_rows;
+                    $sn = 0;
+                    $status = "";
+                    if ($num > 0) {
+                      while ($rows = $rs->fetch_assoc()) {
+                        $sn = $sn + 1;
+                        echo "
+                              <tr>
+                                <td>" . $sn . "</td>
+                                <td>" . $rows['firstName'] . "</td>
+                                <td>" . $rows['lastName'] . "</td>
+                                
+                                <td>" . $rows['admissionNo'] . "</td>
+                                <td>" . $rows['className'] . "</td>
+                                <td><a href='?action=delete&Id=" . $rows['Id'] . "'><i class='fas fa-fw fa-trash'></i></a></td>
+                              </tr>";
+                      }
+                    } else {
+                      echo
+                      "<div class='alert alert-danger' role='alert'>
+                            No Record Found!
+                            </div>";
+                    }
+
+                    ?>
+
+                  </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+
+  </div>
   </div>
   <!---Container Fluid-->
   </div>
@@ -92,68 +139,16 @@ include '../Includes/session.php';
   </div>
   </div>
 
-  
+
 
 
   <!-- Page level custom scripts -->
-  
-
-    
-
-  
-  </table>
-
-
-
   <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const studentForm = document.getElementById('studentForm');
-            const studentTable = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
-
-            const loadStudents = () => {
-                studentTable.innerHTML = '';
-                const students = JSON.parse(localStorage.getItem('students')) || [];
-                students.forEach((student, index) => {
-                    const row = studentTable.insertRow();
-                    row.insertCell(0).innerText = student.number;
-                    row.insertCell(1).innerText = student.firstname;
-                    row.insertCell(2).innerText = student.lastname;
-                    row.insertCell(3).innerText = student.admissionNo;
-                    row.insertCell(4).innerText = student.class;
-                    const actionsCell = row.insertCell(5);
-                    const deleteButton = document.createElement('button');
-                    deleteButton.innerText = 'Delete';
-                    deleteButton.onclick = () => deleteStudent(index);
-                    actionsCell.appendChild(deleteButton);
-                });
-            };
-
-            const deleteStudent = (index) => {
-                const students = JSON.parse(localStorage.getItem('students')) || [];
-                students.splice(index, 1);
-                localStorage.setItem('students', JSON.stringify(students));
-                loadStudents();
-            };
-
-            studentForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const students = JSON.parse(localStorage.getItem('students')) || [];
-                const newStudent = {
-                    number: studentForm.number.value,
-                    firstname: studentForm.firstname.value,
-                    lastname: studentForm.lastname.value,
-                    admissionNo: studentForm.admissionNo.value,
-                    class: studentForm.class.value
-                };
-                students.push(newStudent);
-                localStorage.setItem('students', JSON.stringify(students));
-                loadStudents();
-                studentForm.reset();
-            });
-
-            loadStudents();
-        });
-    </script>
+    $(document).ready(function() {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 </body>
 
 </html>

@@ -1,10 +1,12 @@
 <?php
 error_reporting(0);
-include '../Includes/dbcon.php';
+include '../Includes/dbconn.php';
 include '../Includes/session.php';
 
-
-
+if (isset($_POST['save'])){
+  $className = $_POST['className'];
+  $query=mysqli_query($conn,"INSERT INTO class(className) VALUES ('$className')");
+}
 
 ?>
 
@@ -14,93 +16,84 @@ include '../Includes/session.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="icon" type="image" href="./../image/logo.png">
+  <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/style.css">
 </head>
 
 <body>
-  <div id="wrapper">
-    <!-- Sidebar -->
+  <div>
     <?php include "./topbar.php"; ?>
-    <div id="content" class="attendanceView-container">
+    <div  class="attendanceView-container">
       <?php include "./sidebar.php"; ?>
-      <!-- Sidebar -->
-
-      <div class="container-fluid" id="container-wrapper">
+      <div>
         <div class="Dashboard-name">
           <h1>Create Class</h1>
-
         </div>
-
-
         <div class="viweAttendance-card">
           <div>
-            <h6 style="color: blue; padding:5px" class="side-text">Create Class</h6>
-            <?php echo $statusMsg; ?>
+            <h6 style="color: blue; padding:5px;" class="side-text">Create Class</h6>
           </div>
           <div class="card-body">
-            <form method="post" id="classForm" >
-              <div class="form-group row mb-3">
-                <div>
-                  <label class="form-control-label">Class Name:</label>
-                  <input type="text" class="form-control" name="className" value="<?php echo $row['className']; ?>" id="className" placeholder="Class Name"><br /><br />
-                  <label class="form-control-label">Teacher Name:</label>
-                  <input type="text" class="form-control" id="teacherName" name="teacherName" required placeholder="Teacher Name">
-                </div>
-              </div>
-              <button type="button" id="saveButton" class="btn-view">Save</button>
+            <form method="post" action="">
+              <label for="className" class="form-control-label">Class Name&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+              <input type="text" name="className" class="form-control" required><br><br>
+              <button type="submit" class="btn-view" name="save">Save</button>
             </form>
           </div>
-        </div>
-
-
-        <div class="viweAttendance-card">
+        
+        <div>
           <div>
             <h6 style="color: blue; padding:5px" class="side-text">All Classes</h6>
           </div>
           <div>
-            <table class="table " id="classTable">
+            <table class="table " id="studentTable">
               <thead class="thead-light">
                 <tr>
                   <th>#</th>
                   <th>Class Name</th>
-                  <th>Teacher Name</th>
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
-
-              
+              <tbody >
+              <?php
+                      $query = "SELECT * FROM class";
+                      $rs = $conn->query($query);
+                      $num = $rs->num_rows;
+                      $sn=0;
+                      if($num > 0)
+                      { 
+                        while ($rows = $rs->fetch_assoc())
+                          {
+                             $sn = $sn + 1;
+                            echo"
+                              <tr>
+                                <td>".$sn."</td>
+                                <td>".$rows['className']."</td>
+                                <td><a href='?action=delete&Id=".$rows['Id']."'><i class='fas fa-fw fa-trash'></i>Delete</a></td>
+                              </tr>";
+                          }
+                      }
+                      else
+                      {
+                           echo   
+                           "<div class='alert alert-danger' role='alert'>
+                            No Record Found!
+                            </div>";
+                      }
+                      
+                      ?>
               </tbody>
             </table>
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    document.getElementById('saveButton').addEventListener('click', function() {
-      // Get form inputs
-      const className = document.getElementById('className').value;
-      const teacherName = document.getElementById('teacherName').value;
-
-      // Create a new row for the class table
-      const classTable = document.getElementById('classTable').getElementsByTagName('tbody')[0];
-      const newRow = classTable.insertRow();
-
-      // Add class name to the new row
-      const classNameCell = newRow.insertCell(0);
-      classNameCell.textContent = className;
-
-      // Add teacher name to the new row
-      const teacherNameCell = newRow.insertCell(1);
-      teacherNameCell.textContent = teacherName;
-
-      // Reset form
-      document.getElementById('classForm').reset();
-    });
-  </script>
+ 
 </body>
 
 </html>
