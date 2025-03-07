@@ -24,7 +24,7 @@ session_start();
 
   <div class="overlay" id="overlay">
     <div class="modal">
-      <h5 class="macondo-regular heading align ">STUDENT ATTENDANCE SYSTEM</h5>
+      <h5 class="macondo-regular heading align " style="color: #fff;">STUDENT ATTENDANCE SYSTEM</h5>
       <div class="login-container">
         <div class="text-center">
           <img src="image/logo.png" style="width:100px;height:100px" class="logo-img" alt="logo-image">
@@ -45,7 +45,7 @@ session_start();
                 placeholder="Enter Email Address">
             </div>
             <div>
-              <input type="password" name="password" required class=" macondo-regular input" id="exampleInputPassword"
+              <input type="password" name="password" required class=" macondo-regular input" 
                 placeholder="Enter Password">
             </div>
             <div>

@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error: Student '$student_name' not found.<br>";
             }
         }
-        echo "<p>Attendance recorded successfully!</p>";
+        $statusMsg = "<p class='statusMsg'>Attendance recorded successfully!</p>";
     }
 }
 
@@ -81,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <th>Last Name</th>
                                     <th>Admission No</th>
                                     <th>Class</th>
-                                    <th>Check</th>
-                                    <th>Check</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
                                 </tr>
                             </thead>
 

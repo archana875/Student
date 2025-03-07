@@ -3,16 +3,18 @@ error_reporting(0);
 include '../Includes/dbconn.php';
 include '../Includes/session.php';
 
-if (isset($_POST['save'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $firstName = $_POST['firstName'];
   $lastName = $_POST['lastName'];
-  $email = $_POST['email'];
+  $emailAddress = $_POST['email'];
   $phoneNo = $_POST['phoneNo'];
-  $password = $password['password'];
   $className = $_POST['className'];
 
-  $query = mysqli_query($conn, "INSERT INTO teacher (firstName,lastName,email,phoneNo,password,className) VALUES ('$firstName','$lastName','$email','$phoneNo','$password','$className')");
+  $sampPass = "pass123";
+  $sampPass_2 = md5($sampPass);
+
+  $query = mysqli_query($conn, "INSERT INTO tblclassteacher (firstName,lastName,emailAddress,phoneNo,password,className) VALUES ('$firstName','$lastName','$emailAddress','$phoneNo','$sampPass_2','$className')");
   
 }
 ?>
@@ -52,7 +54,7 @@ if (isset($_POST['save'])) {
 
           </div>
           <div class="card-body">
-            <form id="teacherForm" method="post" action="">
+            <form  method="post" action="#">
               <div style="display: flex;">
               <div>
               <label class="form-control-label">First Name &nbsp;&nbsp;:</label>
@@ -65,8 +67,6 @@ if (isset($_POST['save'])) {
               <div style=" margin-left:50px;">
               <label class="form-control-label">Phone No&nbsp;&nbsp;&nbsp;:</label>
               <input type="text" class="form-control" name="phoneNo"><br><br>
-              <label class="form-control-label">Password:</label>
-              <input type="password" name="password" class="form-control"><br><br>
               <label class="form-control-label">Class Name:</label>
               <input type="text" class="form-control" name="className"><br><br>
               </div>
@@ -89,12 +89,12 @@ if (isset($_POST['save'])) {
                     <th>Email</th>
                     <th>Phone No</th>
                     <th>Class Name</th>
-                    <th>Delete</th>
+                  
                   </tr>
                 </thead>
                 <tbody>
                 <?php
-                      $query = "SELECT * FROM teacher";
+                      $query = "SELECT * FROM tblclassteacher";
                       $rs = $conn->query($query);
                       $num = $rs->num_rows;
                       $sn=0;
@@ -109,10 +109,10 @@ if (isset($_POST['save'])) {
                                 <td>".$sn."</td>
                                 <td>".$rows['firstName']."</td>
                                 <td>".$rows['lastName']."</td>
-                                <td>".$rows['email']."</td>
+                                <td>".$rows['emailAddress']."</td>
                                 <td>".$rows['phoneNo']."</td>
                                 <td>".$rows['className']."</td>
-                                <td><a href='?action=delete&Id=".$rows['Id']."&classArmId=".$rows['classArmId']."'><i class='fas fa-fw fa-trash'></i></a></td>
+                                
                               </tr>";
                           }
                       }

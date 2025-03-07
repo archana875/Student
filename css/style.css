@@ -43,6 +43,7 @@ body{
    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
    padding: 5px ;
    text-decoration: none;
+   box-shadow: 1px 0px 5px 1px rgb(75, 67, 67);
 }
 .login-btn:hover{
     cursor: pointer;
@@ -75,7 +76,7 @@ body{
 }
 .sidebar-container{
     width: 300px;
-    height: 600px;
+    height:auto;
     background-color: #fff;
     visibility: visible;
 }
@@ -117,8 +118,11 @@ body{
 .table,tr,td,th{
     border: 1px solid grey;
     border-collapse: collapse;
-    padding: 5px;
+    padding: 5px 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     width: 900px;
+    font-size: 20px;
     margin-bottom: 30px;
     text-align: center;
 }
@@ -146,4 +150,21 @@ background-color: #92a5e0;
 }
 .thead-light{
     background-color: #e1eaea;
+    padding-top: 10px;
+}
+.statusMsg{
+    background-color: #41e779;
+    width:fit-content;
+    margin: 10px;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+.statusMsgErr{
+    background-color:rgb(250, 122, 122);
+    width:fit-content;
+    margin: 10px;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 5px;
 }
