@@ -52,7 +52,7 @@ if (isset($_POST['save'])){
                 <tr>
                   <th>#</th>
                   <th>Class Name</th>
-                  <th>Delete</th>
+                  
                 </tr>
               </thead>
               <tbody >
@@ -70,7 +70,7 @@ if (isset($_POST['save'])){
                               <tr>
                                 <td>".$sn."</td>
                                 <td>".$rows['className']."</td>
-                                <td><a href='?action=delete&Id=".$rows['Id']."'><i class='fas fa-fw fa-trash'></i>Delete</a></td>
+                               
                               </tr>";
                           }
                       }

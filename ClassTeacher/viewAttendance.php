@@ -76,6 +76,7 @@ include '../Includes/session.php';
 
                   // Output data of each row
                   while ($row = $result->fetch_assoc()) {
+                    if($row['status'] == 'present'){$status = "Present"; $colour="#00FF00";}else{$status = "Absent";$colour="#FF0000";}
                     echo "<tr>
           <td>" . $row["attendance_date"] . "</td>
                   <td>" . $row["student_name"] . "</td>

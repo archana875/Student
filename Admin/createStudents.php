@@ -87,8 +87,6 @@ if (isset($_POST['save'])) {
                     <th>Last Name</th>
                     <th>Admission No</th>
                     <th>Class</th>
-
-                    <th>Delete</th>
                   </tr>
                   </thead>
 
@@ -110,7 +108,7 @@ if (isset($_POST['save'])) {
                                 
                                 <td>" . $rows['admissionNo'] . "</td>
                                 <td>" . $rows['className'] . "</td>
-                                <td><a href='?action=delete&Id=" . $rows['Id'] . "'><i class='fas fa-fw fa-trash'></i></a></td>
+                                
                               </tr>";
                       }
                     } else {
