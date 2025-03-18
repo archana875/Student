@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link rel="icon" type="image" href="./../image/logo.png">
   <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/login.css">
+  <link rel="stylesheet" href="./../css/style.css">
   <link rel="stylesheet" href="./../css/teacher.css">
   <link rel="stylesheet" href="./../css/admin.css">
 </head>
@@ -49,31 +50,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         <div class="viweAttendance-card">
-          <div>
-            <h6 style="color: blue; padding:5px;" class="side-text">Create Class Teachers</h6>
-
-          </div>
+        <button type="button" class="btn-view" onclick="openModel()" style="display:block;margin:auto ;width:300px">Create Class Teacher</button>
+        <div class="overlay " id="overlay">
           <div class="card-body">
             <form  method="post" action="#">
-              <div style="display: flex;">
-              <div>
-              <label class="form-control-label">First Name &nbsp;&nbsp;:</label>
+            <img src="./../image/close.png" class="close-icon" onclick="closeModel()"><br>
+              <label class="form-control-label">First Name </label>
               <input type="text" class="form-control" name="firstName"><br><br>
-              <label class="form-control-label">Last Name &nbsp;&nbsp;:</label>
+              <label class="form-control-label">Last Name</label>
               <input type="text" class="form-control" name="lastName"><br><br>
-              <label class="form-control-label">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+              <label class="form-control-label">Email</label><br>
               <input type="email" class="form-control" name="email"><br><br>
-              </div>
-              <div style=" margin-left:50px;">
-              <label class="form-control-label">Phone No&nbsp;&nbsp;&nbsp;:</label>
+              
+              <label class="form-control-label">Phone No</label>
               <input type="text" class="form-control" name="phoneNo"><br><br>
-              <label class="form-control-label">Class Name:</label>
+              <label class="form-control-label">Class Name</label>
               <input type="text" class="form-control" name="className"><br><br>
-              </div>
-              </div>
+              
               <button type="submit" class="btn-view" name="save">Save</button>
             </form>
           </div>
+        </div>
 
           <div>
             <div>
@@ -133,7 +130,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
     </div>
-
+    <script>
+    function openModel(){
+      const overlayElement = document.getElementById('overlay');
+      overlayElement.style.display = 'flex';
+    }
+    function closeModel(){
+    const overlayElement = document.getElementById('overlay');
+    overlayElement.style.display= 'none';
+}
+  </script>
    
 
 </body>

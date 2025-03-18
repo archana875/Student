@@ -2,6 +2,7 @@ body{
  background-color: #e1eaea;
  margin: 0px;
  padding: 0px;
+ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .home-image{
     width: 100%;
@@ -53,11 +54,7 @@ body{
     font-size: 23px;
     color: rgb(88, 73, 73);
 }
-.icon-sub-item:hover{
-    cursor: pointer;
-    background-color: rgb(206, 195, 195);
-    
-}
+
 .name-icon{
     padding: 20px;
     color: rgb(151, 144, 144);
@@ -66,16 +63,25 @@ body{
     padding: 10px;
     font-size: 25px;
     width: 30px;
-    color:#00134d;
+    
     
 }
 .icon-container{
-    width: 250px;
-    margin-left: 10px;
+    width: 310px;
+    color:#00134d;
    padding: 8px 10px;
 }
+.icon-container:hover{
+    cursor: pointer;
+    background-image: linear-gradient( 109.6deg,  rgba(45,116,213,1) 11.2%, rgb(79, 105, 221) 91.2% );
+    color: #fff;
+    padding: 5px 8px;
+    width: 270px;
+    margin-top: 2px;
+    
+}
 .sidebar-container{
-    width: 300px;
+    width: 280px;
     height:auto;
     background-color: #fff;
     visibility: visible;
@@ -101,6 +107,9 @@ body{
     color: #4d4d33;
     font-size: 20px;
     text-decoration: none;
+}
+.icon-sub-item:hover{
+    color: #fff;
 }
 .project-name{
     font-size: 35px;
@@ -167,4 +176,8 @@ background-color: #92a5e0;
     font-size: 18px;
     padding: 6px 10px;
     border-radius: 5px;
+}
+.close-icon{
+    width: 20px;
+    margin-left: 340px;
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../css/style.css">
-    <link rel="stylesheet" href="./../css/style.css">
+    
     <link rel="icon" type="image" href="./../image/logo.png">
     <title>AMS-Dashboard</title>
 </head>
@@ -20,7 +20,7 @@
         </div>
         <hr/>
         <span class="name-icon">CLASS AND CLASS ARM</span>
-        <div>
+        <div class="icon-container">
             <i class="fas fa-chalkboard icon"></i>
             <span class="macondo-regular side-text">
             <a class="icon-sub-item" href="createClass.php">Create Class</a>
@@ -29,15 +29,15 @@
        
         <hr/>
         <span class="name-icon"> TEACHERS</span>
-        <div>
+        <div class="icon-container">
             <i class="fas fa-chalkboard-teacher icon"></i>
             <span class="macondo-regular side-text">
-                <a class="icon-sub-item" href="createClassTeacher.php">Create Class Teachers</a>
+                <a class="icon-sub-item" href="createClassTeacher.php">Create Teachers</a>
             </span><br/>
         </div>
         <hr/>
         <span class="name-icon">STUDENTS</span>
-        <div>
+        <div class="icon-container">
             <i class="fas fa-user-graduate icon"></i>
             <span class="macondo-regular side-text">
             <a class="icon-sub-item" href="createStudents.php">Create Students</a>
