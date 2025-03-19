@@ -25,53 +25,55 @@ include '../Includes/session.php';
 
             <h1 class="Dashboard-name">Administrator Dashboard
             </h1>
-            
-
+            <div style="display: flex;">
                 <div>
-                <div class="dashboard-card">
-
-                    <div class="font">Students</div>
-                    <div class="font">
-                        10
+                    <div class="dashboard-card">
+                        <div>
+                            <i class="fas fa-users fa-2x text-info dash-icon" style="color: #ff80bf;"></i>
+                        </div><br>
+                        <div class="font " style="margin-left: 80px;">Students <?php
+                                                                                $query1 = mysqli_query($conn, "SELECT * from student");
+                                                                                $students = mysqli_num_rows($query1);
+                                                                                echo $students;
+                                                                                ?></div>
                     </div>
-                    <div>
-                        <i class="fas fa-users fa-2x text-info"></i>
+                    <div class="dashboard-card">
+                        <div>
+                            <i class="fas fa-chalkboard fa-2x text-primary dash-icon" style="color:#00cc00;"></i>
+                        </div><br>
+                        <div class="font" style="margin-left: 80px;">Classes <?php
+                                                                                $query1 = mysqli_query($conn, "SELECT * from class");
+                                                                                $class = mysqli_num_rows($query1);
+                                                                                echo $class;
+                                                                                ?></div>
                     </div>
-                </div>
-                <div class="dashboard-card">
-
-                    <div class="font">Classes</div>
-                    <div class="font">
-                        4
-                    </div>
-                    <div>
-                        <i class="fas fa-chalkboard fa-2x text-primary"></i>
-                    </div>
-                </div>
-        </div>
-        <div>
-            <div class="dashboard-card">
-
-                <div class="font">Class Teacher</div>
-                <div class="font">
-                    3
                 </div>
                 <div>
-                    <i class="fas fa-chalkboard-teacher fa-2x text-danger"></i>
+                    <div class="dashboard-card">
+
+                        <div>
+                            <i class="fas fa-code-branch fa-2x text-success dash-icon" style="color:#ff944d"></i>
+                        </div><br>
+                        <div class="font" style="margin-left: 80px;">Teachers <?php
+                                                                                $query1 = mysqli_query($conn, "SELECT * from tblclassteacher");
+                                                                                $teacher = mysqli_num_rows($query1);
+                                                                                echo $teacher;
+                                                                                ?></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div>
+                            <i class="fas fa-calendar fa-2x text-warning dash-icon" style="color:#bf80ff"></i>
+                        </div><br>
+                        <div class="font" style="margin-left: 10px;">Total Student Attendance
+                            <?
+                            $query1 = mysqli_query($conn, "SELECT * from attendance6");
+                            $totAttendance = mysqli_num_rows($query1);
+                            echo $totAttendance;
+                            ?></div>
+                    </div>
                 </div>
             </div>
-            <div class="dashboard-card">
 
-                <div class="font">Session & Terms</div>
-                <div class="font">
-                    5
-                </div>
-                <div>
-                    <i class="fas fa-calendar-alt fa-2x text-warning"></i>
-                </div>
-            </div>
-        </div>
-        
 </body>
 
 </html>

@@ -19,32 +19,35 @@ if (isset($_POST['save'])){
   <link rel="icon" type="image" href="./../image/logo.png">
   <title>AMS-Dashboard</title>
   <link rel="stylesheet" href="./../css/style.css">
+  <link rel="stylesheet" href="./../css/login.css">
 </head>
 
 <body>
   <div>
     <?php include "./topbar.php"; ?>
-    <div  class="attendanceView-container">
+    <div  class="attendanceView-container " >
       <?php include "./sidebar.php"; ?>
       <div>
         <div class="Dashboard-name">
           <h1>Create Class</h1>
         </div>
         <div class="viweAttendance-card">
-          <div>
-            <h6 style="color: blue; padding:5px;" class="side-text">Create Class</h6>
-          </div>
-          <div class="card-body">
+          
+          <button type="button" class="btn-view" onclick="openModel()" style="display:block;margin:auto">Create Class</button>
+          <div class="overlay " id="overlay">
+            <div class="card-body">
             <form method="post" action="">
-              <label for="className" class="form-control-label">Class Name&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+            <img src="./../image/close.png" class="close-icon" onclick="closeModel()"><br>
+              <label for="className" class="form-control-label">Class Name</label><br>
               <input type="text" name="className" class="form-control" required><br><br>
-              <button type="submit" class="btn-view" name="save">Save</button>
+              <button type="submit" class="btn-view" name="save" >Save</button>
             </form>
+            </div>
           </div>
         
         <div>
           <div>
-            <h6 style="color: blue; padding:5px" class="side-text">All Classes</h6>
+            <h6 style=" padding:5px" class="side-text">All Classes</h6>
           </div>
           <div>
             <table class="table " id="studentTable">
@@ -93,7 +96,16 @@ if (isset($_POST['save'])){
     </div>
   </div>
 
- 
+  <script>
+    function openModel(){
+      const overlayElement = document.getElementById('overlay');
+      overlayElement.style.display = 'flex';
+    }
+    function closeModel(){
+    const overlayElement = document.getElementById('overlay');
+    overlayElement.style.display= 'none';
+}
+  </script>
 </body>
 
 </html>

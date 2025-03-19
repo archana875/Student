@@ -31,13 +31,13 @@
             <hr />
             <span class="name-icon">ATTENDANCE</span>
             <div class="icon-container">
-                <i class="fa fa-calendar-alt icon"></i>
-                <span class="macondo-regular side-text">
                     <a class="icon-sub-item " href="takeAttendance.php">Take Attendance</a><br /><br />
-                    <a class="icon-sub-item " href="viewAttendance.php">View Class Attendance</a><br /><br />
-                    
-                    <a class="icon-sub-item " href="download.php">Download Records</a>
-                </span><br />
+            </div>
+            <div class="icon-container">
+            <a class="icon-sub-item " href="viewAttendance.php">View Class Attendance</a><br /><br />
+            </div>
+            <div class="icon-container">
+            <a class="icon-sub-item " href="download.php">Download Records</a>
             </div>
         </div>
 

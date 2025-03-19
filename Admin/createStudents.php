@@ -48,27 +48,25 @@ if (isset($_POST['save'])) {
           </div>
 
           <div class="viweAttendance-card">
-          <div>
-            <h6 style="color: blue; padding:5px;" class="side-text">Create Students</h6>
-
-          </div>
+          <button type="button" class="btn-view" onclick="openModel()" style="display:block;margin:auto">Create Student</button>
+          <div class="overlay " id="overlay">
+          <div class="card-body">
             <form method="post" action="">
-              <div style="display: flex;">
-                <div>
-                  <label class="form-control-label">Firstname:</label>
+            <img src="./../image/close.png" class="close-icon" onclick="closeModel()"><br>
+                  <label class="form-control-label">First Name:</label>
                   <input type="text" class="form-control" name="firstName"><br><br>
-                  <label class="form-control-label">Lastname:</label>
+                  <label class="form-control-label">Last Name:</label>
                   <input type="text" class="form-control" name="lastName"><br><br>
-                </div>
-                <div style=" margin-left:50px;">
+                
                   <label class="form-control-label">Admission Number:</label>
                   <input type="text" class="form-control" required name="admissionNo"><br><br>
                   <label class="form-control-label">Class Name:</label>
                   <input type="text" class="form-control" required name="className"><br><br>
-                </div>
-              </div>
+              
               <button type="submit" class="btn-view" name="save">Save</button>
             </form>
+          </div>
+          </div>
 
 
 
@@ -142,10 +140,14 @@ if (isset($_POST['save'])) {
 
   <!-- Page level custom scripts -->
   <script>
-    $(document).ready(function() {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
+    function openModel(){
+      const overlayElement = document.getElementById('overlay');
+      overlayElement.style.display = 'flex';
+    }
+    function closeModel(){
+    const overlayElement = document.getElementById('overlay');
+    overlayElement.style.display= 'none';
+}
   </script>
 </body>
 
